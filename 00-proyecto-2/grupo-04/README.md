@@ -26,7 +26,7 @@ Códigos subidos por fecha en la carpeta "codigos".
 
 Conversaciones con Claude al final del ReadMe.
 
-[Wokwi proyecto-02](https://wokwi.com/projects/478683034244407297)
+Visualizar proyecto [Wokwi proyecto-02](https://wokwi.com/projects/478683034244407297)
 
 ---
 
@@ -95,8 +95,6 @@ Perilla 2: recorrer el texto
 ---
 
 ## Código y clases
-
-# Clases del Proyecto-02
 
 - **Ambos:** lo usan el Grupo 04 y el Grupo 03.
 - **04:** solo el Grupo 04 (máquina multitap).
