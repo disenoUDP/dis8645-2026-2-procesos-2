@@ -102,7 +102,7 @@ Perilla 2: recorrer el texto
 
 ---
 
-## Clase `Boton` (archivo `Boton.h` y `Boton.cpp`)
+### Clase `Boton` (archivo `Boton.h` y `Boton.cpp`)
 
 Una sola clase de botón para los dos grupos. Detecta si el botón está apretado, cuántos clics tuvo y si se mantuvo apretado.
 
@@ -114,7 +114,7 @@ Una sola clase de botón para los dos grupos. Detecta si el botón está apretad
 
 ---
 
-## `Perilla`: un potenciómetro
+### `Perilla`: un potenciómetro
 
 
 | Atributos | Métodos |
@@ -135,7 +135,7 @@ Una sola clase de botón para los dos grupos. Detecta si el botón está apretad
 | Pantalla de abajo | Muestra el carrusel de caracteres con el elegido entre corchetes |
 
 
-## Conexiones
+### Conexiones
 
 | Componente | Pines del Pico |
 |---|---|
@@ -147,7 +147,7 @@ Una sola clase de botón para los dos grupos. Detecta si el botón está apretad
 | Botón selector | GP21 (a GND, con pull-up interno) |
 
 
-## Qué hace cada archivo
+### Qué hace cada archivo
 
 | Archivo | Qué hace | Cómo lo hace |
 |---|---|---|
