@@ -14,6 +14,8 @@ Monserrat Paredes / [Monserrat-Paredes](https://github.com/Monserrat-Paredes) / 
 
 Katalina Riquelme / [riyakatalinaa](https://github.com/riyakatalinaa) / Diagrama de flujo, documentación.
 
+---
+
 ## Importante 
 
 Todas las imágenes y gifs son de nuestra autoría.
@@ -52,6 +54,8 @@ Funciona a través de un selector de caracteres (perilla), que nos permite escog
 
 También podemos editar el texto que imprimimos en una segunda pantalla con una segunda perilla que puede recorrer el texto para añadir un carácter, borrarlo, o borrar todo lo digitado si se mantiene presionado.
 
+---
+
 ## Proceso
 
 Comenzamos buscando qué ideas o aparatos funcionaban a partir de los elementos solicitados, como por ejemplo podrían ser las máquinas de casinos (juegos de azar).
@@ -88,7 +92,80 @@ Perilla 1: elegir la letra
 
 Perilla 2: recorrer el texto
 
+---
+
 ## Código y clases
+
+# Clases del Proyecto-02
+
+- **Ambos:** lo usan el Grupo 04 y el Grupo 03.
+- **04:** solo el Grupo 04 (máquina multitap).
+- **03:** solo el Grupo 03 (máquina de emociones).
+
+---
+
+## Clase `Boton` (archivo `Boton.h` y `Boton.cpp`)
+
+Una sola clase de botón para los dos grupos. Detecta si el botón está apretado, cuántos clics tuvo y si se mantuvo apretado.
+
+| Grupo | Atributos | Métodos |
+|---|---|---|
+| **Ambos** | `patita` (pin), `presionado` (¿está apretado?), `duracionPresionado` (ms apretado), eventos `clicSimple`, `dobleClic`, `tripleClic`, `pulsacionLarga`, `seAcabaDePresionar`, `seAcabaDeSoltar` (son `true` solo en la vuelta en que ocurren), tiempos `tiempoAntirrebote`, `tiempoLargo`, `ventanaClics`, `clicsMaximos` | `Boton(pin, modo)` crea el botón. `leer()` actualiza todo y se llama en cada vuelta. `presionar()`, `soltar()` y `emitirClics()` las usa `leer()` por dentro |
+| **04** (multitap) | `permitirDoble` (`false` = el clic sale al tiro, sin esperar un 2.º clic) | `Boton(pin, permitirDoble)` |
+| **03** (emociones) | `pin`, `estado` (`true` = apretado), `funcion` (qué hace el botón), `modoAlternar` y `activo` (encendido o apagado), `accion` (función que se ejecuta al presionar) | `esta_presionado()`, `fue_presionado()` (`true` una sola vez por pulsación), `fue_liberado()`, `alternar()`, `asignarAccion()`, `ejecutarAccion()` |
+
+---
+
+## `Perilla`: un potenciómetro
+
+
+| Atributos | Métodos |
+|---|---|
+| `patita` (pin con ADC: GP26, GP27 o GP28), `valor` (posición de 0 a 4095), `movio` (`true` solo en la vuelta en que se movió), `umbral` (cuánto debe cambiar para contar como movimiento), `invertir` (da vuelta el sentido), `canal` (canal del ADC) | `Perilla(pin)` crea la perilla. `leer()` la lee en cada vuelta y levanta `movio`. `posicion(n)` dice en qué tramo está, de 0 a n − 1. `muestrear()` promedia 8 lecturas para quitar el ruido |
+
+**Instancias:** `perillaSelector` (GP26, elige el carácter) y `perillaCursor` (GP27, mueve el cursor).
+
+---
+
+| Control | Qué hace |
+|---|---|
+| Potenciómetro selector | Elige el carácter. Cada carácter tiene su propio tramo del recorrido |
+| Botón selector | 1 clic escribe el carácter en minúscula, 2 clics lo escriben en MAYÚSCULA |
+| Potenciómetro cursor | Mueve el cursor por el texto ya escrito |
+| Botón borrar | 1 clic borra el carácter anterior al cursor, mantenerlo apretado 1 segundo borra todo |
+| Pantalla de arriba | Muestra el texto digitado y el cursor |
+| Pantalla de abajo | Muestra el carrusel de caracteres con el elegido entre corchetes |
+
+
+## Conexiones
+
+| Componente | Pines del Pico |
+|---|---|
+| Pantalla de texto (I2C0) | SDA GP4, SCL GP5 |
+| Pantalla del selector (I2C1) | SDA GP6, SCL GP7 |
+| Potenciómetro selector | SIG GP26 |
+| Potenciómetro cursor | SIG GP27 |
+| Botón borrar | GP20 (a GND, con pull-up interno) |
+| Botón selector | GP21 (a GND, con pull-up interno) |
+
+
+## Qué hace cada archivo
+
+| Archivo | Qué hace | Cómo lo hace |
+|---|---|---|
+| `main.cpp` | Une todo el proyecto | Crea 2 pantallas, 2 perillas, 2 botones, el selector y el editor. En un bucle infinito lee todo y, si algo cambió, actualiza y redibuja. `dibujarTexto()` y `dibujarSelector()` arman las líneas y las mandan al LCD |
+| `Boton.h` | Ficha del botón | Declara qué datos guarda (estado, eventos, tiempos) y sus métodos |
+| `Boton.cpp` | Detecta clics y pulsación larga | Lee el pin (invertido por el pull-up) y exige 20 ms estables contra el rebote. Cuenta clics al soltar: un 2.º clic dentro de 300 ms es doble, y si pasan sin él es simple. Si lleva 1 s apretado es pulsación larga y no cuenta como clic. Con `permitirDoble = false` el clic sale al tiro |
+| `Perilla.h` | Ficha del potenciómetro | Declara el pin del ADC, el valor (0 a 4095), `movio`, `umbral` e `invertir` |
+| `Perilla.cpp` | Dice en qué tramo está la perilla | Lee el ADC 8 veces y promedia. Si el valor cambia más que `umbral`, levanta `movio`. `posicion(n)` divide el recorrido en n tramos iguales con `valor * n / 4096` |
+| `Pantalla.h` | Ficha del LCD | Declara el bus I2C, los pines SDA/SCL, la dirección 0x27 y los métodos |
+| `Pantalla.cpp` | Driver del LCD | Inicia el I2C a 400 kHz y pasa el LCD a modo 4 bits. Manda cada carácter o comando en dos mitades por el módulo PCF8574. `escribirLinea` escribe 20 caracteres y rellena con espacios |
+| `Selector.h` | Ficha de la lista de caracteres | Declara la lista, el total y el índice elegido |
+| `Selector.cpp` | Maneja la lista de 37 caracteres | La lista es a-z, espacio, `.,!?-_@#`, TAB y ENTER. `mover()` da la vuelta al llegar al borde. `etiqueta()` convierte TAB, ENTER y espacio en `TAB`, `ENT` y `SPC`. `mayuscula()` pasa a-z a A-Z |
+| `Editor.h` | Ficha del texto | Declara el texto, el cursor y la grilla de 4x20 ya armada con la posición del cursor |
+| `Editor.cpp` | Edita el texto y lo reparte en la pantalla | `insertar` mete el carácter en el cursor y corre lo de la derecha. `borrar` quita el anterior. `armar()` reparte el texto en las 4 filas: ENTER baja de línea, TAB deja espacios hasta un múltiplo de 4, y si una línea se llena sigue en la de abajo. Si no cabe en las 4 filas, la inserción se deshace |
+| `diagram.json` | Cableado de Wokwi | Define las piezas (Pico, 2 LCD, 2 potenciómetros, 2 botones) y sus conexiones |
+
 
 ## Diagramas de flujo
 
