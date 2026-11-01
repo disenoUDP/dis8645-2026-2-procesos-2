@@ -116,9 +116,9 @@ En clase Boton encontramos:
 
 ---
 
-## Qué hace cada archivo
+### Qué hace cada archivo
 
-Cada clase vive en sus propios archivos: el `.h` declara y el `.cpp` implementa. El detalle de cada una está en la sección anterior.
+Cada clase vive en sus propios archivos: el `.h` declara, el `.cpp` implementa y el main no es una clase, pero es el programa principal que junta todo y hace que funcione.
 
 | Archivos | Qué contienen |
 |---|---|
