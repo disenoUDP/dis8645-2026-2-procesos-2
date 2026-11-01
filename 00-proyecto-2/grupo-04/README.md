@@ -133,7 +133,7 @@ Cada clase vive en sus propios archivos: el `.h` declara, el `.cpp` implementa y
 
 ### Conexiones
 
-| Componente | Pines del Pico |
+| Componente | Pines Raspberry |
 |---|---|
 | Pantalla de texto (I2C0) | SDA GP4, SCL GP5 |
 | Pantalla del selector (I2C1) | SDA GP6, SCL GP7 |
