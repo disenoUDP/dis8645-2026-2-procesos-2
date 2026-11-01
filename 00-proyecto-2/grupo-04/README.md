@@ -94,34 +94,25 @@ Perilla 2: recorrer el texto
 
 ---
 
-## Código y clases
+## Clases y código del proyecto
 
-- **Ambos:** lo usan el Grupo 04 y el Grupo 03.
+Cada clase está en sus propios archivos: el `.h` dice qué tiene y el `.cpp` dice cómo lo hace.
+
+En clase Boton encontramos:
+
+- **Botón genérico:** lo usan ambos grupos.
 - **04:** solo el Grupo 04 (máquina multitap).
 - **03:** solo el Grupo 03 (máquina de emociones).
 
----
-
-### Clase `Boton` (archivo `Boton.h` y `Boton.cpp`)
-
-Una sola clase de botón para los dos grupos. Detecta si el botón está apretado, cuántos clics tuvo y si se mantuvo apretado.
-
-| Grupo | Atributos | Métodos |
-|---|---|---|
-| **Ambos** | `patita` (pin), `presionado` (¿está apretado?), `duracionPresionado` (ms apretado), eventos `clicSimple`, `dobleClic`, `tripleClic`, `pulsacionLarga`, `seAcabaDePresionar`, `seAcabaDeSoltar` (son `true` solo en la vuelta en que ocurren), tiempos `tiempoAntirrebote`, `tiempoLargo`, `ventanaClics`, `clicsMaximos` | `Boton(pin, modo)` crea el botón. `leer()` actualiza todo y se llama en cada vuelta. `presionar()`, `soltar()` y `emitirClics()` las usa `leer()` por dentro |
-| **04** (multitap) | `permitirDoble` (`false` = el clic sale al tiro, sin esperar un 2.º clic) | `Boton(pin, permitirDoble)` |
-| **03** (emociones) | `pin`, `estado` (`true` = apretado), `funcion` (qué hace el botón), `modoAlternar` y `activo` (encendido o apagado), `accion` (función que se ejecuta al presionar) | `esta_presionado()`, `fue_presionado()` (`true` una sola vez por pulsación), `fue_liberado()`, `alternar()`, `asignarAccion()`, `ejecutarAccion()` |
-
----
-
-### `Perilla`: un potenciómetro
-
-
-| Atributos | Métodos |
-|---|---|
-| `patita` (pin con ADC: GP26, GP27 o GP28), `valor` (posición de 0 a 4095), `movio` (`true` solo en la vuelta en que se movió), `umbral` (cuánto debe cambiar para contar como movimiento), `invertir` (da vuelta el sentido), `canal` (canal del ADC) | `Perilla(pin)` crea la perilla. `leer()` la lee en cada vuelta y levanta `movio`. `posicion(n)` dice en qué tramo está, de 0 a n − 1. `muestrear()` promedia 8 lecturas para quitar el ruido |
-
-**Instancias:** `perillaSelector` (GP26, elige el carácter) y `perillaCursor` (GP27, mueve el cursor).
+| Clase | Qué es | Qué hace en el proyecto | Archivos |
+|---|---|---|---|
+| **Botón genérico** (parte común) | Un botón físico, para los dos grupos | Detecta si está apretado, y si fue clic simple, doble, triple o pulsación larga. Se puede cambiar el cableado y los tiempos | `Boton.h`, `Boton.cpp` (carpeta `boton_proyecto02`) |
+| **Botón Grupo 04** (multitap) | El botón de nuestro proyecto | Agrega `permitirDoble`: el botón de borrar no espera un segundo clic. Instancias: `botonSelector` (1 clic = minúscula, 2 clics = MAYÚSCULA) y `botonBorrar` (1 clic borra un carácter, mantenerlo borra todo) | Misma clase `Boton` |
+| **Botón Grupo 03** (emociones) | El botón de la máquina de emociones | Agrega `pin`, `estado` y `funcion`, y los métodos `esta_presionado()` y `fue_presionado()`. Puede alternar entre encendido y apagado. Instancias: `boton_encendido` y `boton_salto` | Misma clase `Boton` |
+| `Perilla` | Un potenciómetro | Dice en qué tramo está la perilla, para elegir un carácter o mover el cursor | `Perilla.h`, `Perilla.cpp` |
+| `Pantalla` | Una pantalla LCD 20x4 | Escribe líneas de texto y mueve el cursor | `Pantalla.h`, `Pantalla.cpp` |
+| `Selector` | La lista de caracteres | Guarda las 37 opciones (letras, símbolos, TAB y ENTER) y cuál está elegida | `Selector.h`, `Selector.cpp` |
+| `Editor` | El texto digitado | Guarda el texto y el cursor, inserta y borra caracteres, y los reparte en 4 filas de 20 | `Editor.h`, `Editor.cpp` |
 
 ---
 
