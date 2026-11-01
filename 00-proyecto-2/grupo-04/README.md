@@ -125,14 +125,19 @@ Una sola clase de botón para los dos grupos. Detecta si el botón está apretad
 
 ---
 
-| Control | Qué hace |
+## Qué hace cada archivo
+
+Cada clase vive en sus propios archivos: el `.h` declara y el `.cpp` implementa. El detalle de cada una está en la sección anterior.
+
+| Archivos | Qué contienen |
 |---|---|
-| Potenciómetro selector | Elige el carácter. Cada carácter tiene su propio tramo del recorrido |
-| Botón selector | 1 clic escribe el carácter en minúscula, 2 clics lo escriben en MAYÚSCULA |
-| Potenciómetro cursor | Mueve el cursor por el texto ya escrito |
-| Botón borrar | 1 clic borra el carácter anterior al cursor, mantenerlo apretado 1 segundo borra todo |
-| Pantalla de arriba | Muestra el texto digitado y el cursor |
-| Pantalla de abajo | Muestra el carrusel de caracteres con el elegido entre corchetes |
+| `main.cpp` | El programa principal, que conecta todas las clases |
+| `Boton.h` · `Boton.cpp` | El botón: clic simple, doble y pulsación larga |
+| `Perilla.h` · `Perilla.cpp` | El potenciómetro: lee su posición |
+| `Pantalla.h` · `Pantalla.cpp` | El LCD 20x4: escribe en la pantalla |
+| `Selector.h` · `Selector.cpp` | La lista de caracteres y el elegido |
+| `Editor.h` · `Editor.cpp` | El texto digitado y el cursor |
+| `diagram.json` | El cableado de Wokwi |
 
 
 ### Conexiones
@@ -146,23 +151,6 @@ Una sola clase de botón para los dos grupos. Detecta si el botón está apretad
 | Botón borrar | GP20 (a GND, con pull-up interno) |
 | Botón selector | GP21 (a GND, con pull-up interno) |
 
-
-### Qué hace cada archivo
-
-| Archivo | Qué hace | Cómo lo hace |
-|---|---|---|
-| `main.cpp` | Une todo el proyecto | Crea 2 pantallas, 2 perillas, 2 botones, el selector y el editor. En un bucle infinito lee todo y, si algo cambió, actualiza y redibuja. `dibujarTexto()` y `dibujarSelector()` arman las líneas y las mandan al LCD |
-| `Boton.h` | Ficha del botón | Declara qué datos guarda (estado, eventos, tiempos) y sus métodos |
-| `Boton.cpp` | Detecta clics y pulsación larga | Lee el pin (invertido por el pull-up) y exige 20 ms estables contra el rebote. Cuenta clics al soltar: un 2.º clic dentro de 300 ms es doble, y si pasan sin él es simple. Si lleva 1 s apretado es pulsación larga y no cuenta como clic. Con `permitirDoble = false` el clic sale al tiro |
-| `Perilla.h` | Ficha del potenciómetro | Declara el pin del ADC, el valor (0 a 4095), `movio`, `umbral` e `invertir` |
-| `Perilla.cpp` | Dice en qué tramo está la perilla | Lee el ADC 8 veces y promedia. Si el valor cambia más que `umbral`, levanta `movio`. `posicion(n)` divide el recorrido en n tramos iguales con `valor * n / 4096` |
-| `Pantalla.h` | Ficha del LCD | Declara el bus I2C, los pines SDA/SCL, la dirección 0x27 y los métodos |
-| `Pantalla.cpp` | Driver del LCD | Inicia el I2C a 400 kHz y pasa el LCD a modo 4 bits. Manda cada carácter o comando en dos mitades por el módulo PCF8574. `escribirLinea` escribe 20 caracteres y rellena con espacios |
-| `Selector.h` | Ficha de la lista de caracteres | Declara la lista, el total y el índice elegido |
-| `Selector.cpp` | Maneja la lista de 37 caracteres | La lista es a-z, espacio, `.,!?-_@#`, TAB y ENTER. `mover()` da la vuelta al llegar al borde. `etiqueta()` convierte TAB, ENTER y espacio en `TAB`, `ENT` y `SPC`. `mayuscula()` pasa a-z a A-Z |
-| `Editor.h` | Ficha del texto | Declara el texto, el cursor y la grilla de 4x20 ya armada con la posición del cursor |
-| `Editor.cpp` | Edita el texto y lo reparte en la pantalla | `insertar` mete el carácter en el cursor y corre lo de la derecha. `borrar` quita el anterior. `armar()` reparte el texto en las 4 filas: ENTER baja de línea, TAB deja espacios hasta un múltiplo de 4, y si una línea se llena sigue en la de abajo. Si no cabe en las 4 filas, la inserción se deshace |
-| `diagram.json` | Cableado de Wokwi | Define las piezas (Pico, 2 LCD, 2 potenciómetros, 2 botones) y sus conexiones |
 
 
 ## Diagramas de flujo
