@@ -10,6 +10,12 @@ Aarón nos contó que por los 20? años de la escuela de Arte en la UDP, van a r
 
 ![Contraportada Glosario Común](./imagenes/glosario-2.jpg)
 
-![Pág. Ejemplo Glosario Común](./imagenes/glosario-3.jpg)
+![Pág. Título Glosario Común](./imagenes/glosario-3.jpg)
+
+![Pág. Ejemplo Glosario Común](./imagenes/glosario-4.jpg)
+
+---
+
+Comenzamos revisando los avances de cada grupo (not really, we skipped over some lol)
 
 ## encargos
