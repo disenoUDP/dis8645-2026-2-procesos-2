@@ -68,6 +68,22 @@ Arte sonora - Santiago Auserón
 
 [Museo bioacústico](https://museobioacustico.org/)
 
-- Revisamos al [Grupo 028]()
+- Revisamos al [Grupo 08](https://github.com/sz-mada/dis8645-2026-2-procesos-2/tree/main/27-angel-udp/sesion-13a/README.md)
 
-- Revisamos al [Grupo 028]()
+Medir afinación e intensidad
+
+Detectar comandos de voz = waaaaaaaaaay too hard
+
+Descripción de macro a micro
+
+- Revisamos al [Grupo 02](https://github.com/sz-mada/dis8645-2026-2-procesos-2/tree/main/13-anaisbmg/sesion-13a/README.md)
+
+Tener parámetros claros
+
+---
+
+Necesitamos trabajar el pseudocódigo y el esqueleto en Wokwi para poder profundizar en lo más técnico el martes
+
+## "Avance" para el martes
+
+
