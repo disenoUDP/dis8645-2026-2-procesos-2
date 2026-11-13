@@ -24,7 +24,7 @@ Autotune: measures and corrects pitch in recorded or live human vocals and instr
 
 - Revisamos al [Grupo 07](https://github.com/sz-mada/dis8645-2026-2-procesos-2/tree/main/10-blosssom-n/sesion-13a/README.md) (el nuestro jiji)
 
-Fan Connect no solo es muy ambicioso, pero no sabemos cómo approach los derechos de autor, Aarón habló del juego de mesa "HITSTER" como idea (en las cartas/tarjetas, hay un escaneable que lleva a Spotify)
+Fan Connect no solo es muy ambicioso, pero no sabemos how to approach los derechos de autor, Aarón habló del juego de mesa "HITSTER" como idea (en las cartas/tarjetas, hay un escaneable que lleva a Spotify)
 
 Si voy a diseño abierto solo, cómo interactúo con el dispositivo? :thinking:
 
@@ -56,8 +56,18 @@ Distinguimos la posición de los sonidos from up and down porque cambia la frecu
 
 Los detectives salvajes - Roberto Bolaño
 
-- Revisamos al [Grupo 0238]()
+Wanna construir un mundo sonoro but don't have enough time? [freesound.org](https://freesound.org/) is your friend
 
-- Revisamos al [Grupo 0238]()
+<https://radio.garden/>
 
-- Revisamos al [Grupo 0238]()
+<https://audiomapa.org/>
+
+- Revisamos al [Grupo 03](https://github.com/sz-mada/dis8645-2026-2-procesos-2/tree/main/17-catalinaoyanedel-01/sesion-13a/README.md)
+
+Arte sonora - Santiago Auserón
+
+[Museo bioacústico](https://museobioacustico.org/)
+
+- Revisamos al [Grupo 028]()
+
+- Revisamos al [Grupo 028]()
